@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
-SECRET_KEY = 'django-insecure-3)m&sy_8*axs$8s^1!l3i6qvvo&#e2(u@(s$r43to#bt-w_rmm'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
