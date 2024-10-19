@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tezyetkaz-api2"
+version = "0.1.0"
+description = ""
+authors = ["wick <rakhmanov0410@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.2"
+django-ckeditor-5 = "^0.2.13"
+django-mptt = "^0.16.0"
+python-dotenv = "^1.0.1"
+psycopg2-binary = "^2.9.9"
+drf-spectacular = "^0.27.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
