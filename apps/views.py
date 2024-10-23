@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, ListAPIView
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 from apps.models import Product, User, Category
@@ -18,15 +19,6 @@ from apps.serializers import (
 class UserAPIView(ListAPIView):
     queryset = User.objects.order_by('id')
     serializer_class = UserModelSerializer
-
-    def get(self, *args, **kwargs):
-        emails = [user.email for user in User.objects.all()]
-        return Response(emails)
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response({"message": "OK"}, status=status.HTTP_200_OK)
 
 
 @extend_schema(tags=['auth'])

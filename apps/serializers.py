@@ -9,7 +9,9 @@ from apps.models import Product, User, Category, Restaurant, RestaurantCategory
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = 'id', 'first_name', 'last_name',  'email',
+
+
 
 
 class SendCodeMailSerializer(Serializer):
@@ -50,10 +52,17 @@ class VerifyCodeSerializer(Serializer):
 class CategoryListModelSerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = 'name', 'photo'
+
 
 
 class RestaurantListModelSerializer(ModelSerializer):
+    class Meta:
+        model = Restaurant
+        exclude = ('category',)
+
+
+class RestaurantDetailModelSerializer(ModelSerializer):
     class Meta:
         model = Restaurant
         exclude = ('category',)
@@ -72,6 +81,5 @@ class ProductListModelSerializer(ModelSerializer):
 
     def to_representation(self, instance: Product):
         repr = super().to_representation(instance)
-        repr['user'] = UserModelSerializer(instance.name).data
         repr['category'] = CategoryListModelSerializer(instance.category).data
         return repr
