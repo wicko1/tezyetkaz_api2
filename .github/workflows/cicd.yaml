@@ -16,6 +16,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/tez_yetkaz/backend
+            cd /var/www/tez_yetkaz/
             git pull 
             systemctl restart tez_yetkaz.service
