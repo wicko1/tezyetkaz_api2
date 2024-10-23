@@ -205,7 +205,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Tez - Yetkaz Rahmon1ov api',
+    'TITLE': 'Tez - Yetkaz 111 api',
     'DESCRIPTION': 'Your project description',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
