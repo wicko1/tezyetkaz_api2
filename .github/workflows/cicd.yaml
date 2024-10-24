@@ -16,6 +16,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/nurislom/tezyetkaz_api2
+            cd /var/www/tezyetkaz_api2
             git pull 
             systemctl restart tez_yetkaz.service
