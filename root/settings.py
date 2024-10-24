@@ -205,7 +205,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Tez - Yetkaz api 11233',
+    'TITLE': 'Tez - Yetkaz api 1123344',
     'DESCRIPTION': 'Your project description',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
