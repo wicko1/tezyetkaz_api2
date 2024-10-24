@@ -205,7 +205,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Tez - Yetkaz api Nurislom 1',
+    'TITLE': 'Tez - Yetkaz api real project',
     'DESCRIPTION': 'Your project description',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
