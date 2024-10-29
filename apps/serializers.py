@@ -9,7 +9,7 @@ from apps.models import Product, User, Category, Restaurant, RestaurantCategory
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = 'id', 'first_name', 'last_name',  'email',
+        fields = 'id', 'first_name', 'last_name',  'email', 'profile_photo'
 
 
 
