@@ -58,7 +58,7 @@ class CategoryListModelSerializer(ModelSerializer):
 class RestaurantListModelSerializer(ModelSerializer):
     class Meta:
         model = Restaurant
-        exclude =
+        exclude = ()
 
 
 class RestaurantDetailModelSerializer(ModelSerializer):
