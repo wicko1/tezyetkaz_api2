@@ -4,14 +4,14 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListCreateAPIView, ListAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.response import Response
 
 from apps.models import Product, User, Category
 from apps.serializers import (
     SendCodeMailSerializer,
     VerifyCodeSerializer, ProductListModelSerializer, UserModelSerializer, CategoryListModelSerializer,
+    RestaurantListModelSerializer,
 )
 
 
@@ -53,9 +53,19 @@ class VerifyCodeAPIView(GenericAPIView):
 
 
 @extend_schema(tags=['head_category'])
-class CategoryListCreateAPIView(ListCreateAPIView):
+class CategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryListModelSerializer
+
+
+
+
+@extend_schema(tags=['restaurant'])
+class RestaurantListAPIView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = RestaurantListModelSerializer
+
+
 
 
 @extend_schema(tags=['product'])

@@ -52,14 +52,13 @@ class VerifyCodeSerializer(Serializer):
 class CategoryListModelSerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = 'name', 'photo'
-
+        exclude = ()
 
 
 class RestaurantListModelSerializer(ModelSerializer):
     class Meta:
         model = Restaurant
-        exclude = ('category',)
+        exclude =
 
 
 class RestaurantDetailModelSerializer(ModelSerializer):
