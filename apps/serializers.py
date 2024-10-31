@@ -6,10 +6,6 @@ from rest_framework.serializers import Serializer, EmailField
 from apps.models import Product, User, Category, Restaurant, RestaurantCategory
 
 
-class UserModelSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        fields = 'id', 'first_name', 'last_name',  'email', 'profile_photo'
 
 
 
@@ -49,22 +45,33 @@ class VerifyCodeSerializer(Serializer):
         return attrs
 
 
+class UserModelSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = 'id', 'first_name', 'last_name',  'email', 'profile_photo'
+
+
+
 class CategoryListModelSerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = 'name', 'photo'
+
+
+class CategoryDetailModelSerializer(ModelSerializer):
     class Meta:
         model = Category
         exclude = ()
 
 
 class RestaurantListModelSerializer(ModelSerializer):
+    categories = CategoryListModelSerializer(many=True, read_only=True)
+
     class Meta:
         model = Restaurant
-        exclude = ()
+        exclude = ('')
 
 
-class RestaurantDetailModelSerializer(ModelSerializer):
-    class Meta:
-        model = Restaurant
-        exclude = ('category',)
 
 
 class RestaurantCategoryListModelSerializer(ModelSerializer):

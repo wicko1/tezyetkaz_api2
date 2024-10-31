@@ -4,14 +4,15 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, ListCreateAPIView, \
+    RetrieveDestroyAPIView
 from rest_framework.response import Response
 
-from apps.models import Product, User, Category
+from apps.models import Product, User, Category, Restaurant, RestaurantCategory
 from apps.serializers import (
     SendCodeMailSerializer,
     VerifyCodeSerializer, ProductListModelSerializer, UserModelSerializer, CategoryListModelSerializer,
-    RestaurantListModelSerializer,
+    RestaurantListModelSerializer, RestaurantCategoryListModelSerializer, CategoryDetailModelSerializer,
 )
 
 
@@ -53,22 +54,30 @@ class VerifyCodeAPIView(GenericAPIView):
 
 
 @extend_schema(tags=['head_category'])
-class CategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
+class CategoryListCreateAPIView(ListCreateAPIView):
+    queryset = Category.objects.order_by('id')
     serializer_class = CategoryListModelSerializer
 
 
+@extend_schema(tags=['head_category'])
+class CategoryRetrieveUpdateDestroyAPIView(RetrieveDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryDetailModelSerializer
 
 
 @extend_schema(tags=['restaurant'])
-class RestaurantListAPIView(ListAPIView):
-    queryset = Category.objects.all()
+class RestaurantRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Restaurant.objects.all()
     serializer_class = RestaurantListModelSerializer
 
 
+@extend_schema(tags=['restaurant_category'])
+class RestaurantCategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = RestaurantCategory.objects.all()
+    serializer_class = RestaurantCategoryListModelSerializer
 
 
 @extend_schema(tags=['product'])
-class ProductListAPIView(ListAPIView):
+class ProductRetrieveUpdateDestroyAPIViewAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListModelSerializer
