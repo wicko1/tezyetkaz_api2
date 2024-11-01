@@ -13,6 +13,7 @@ from apps.serializers import (
     SendCodeMailSerializer,
     VerifyCodeSerializer, ProductListModelSerializer, UserModelSerializer, CategoryListModelSerializer,
     RestaurantListModelSerializer, RestaurantCategoryListModelSerializer, CategoryDetailModelSerializer,
+    RestaurantDetailModelSerializer, RestaurantCategoryDetailModelSerializer,
 )
 
 
@@ -60,21 +61,33 @@ class CategoryListCreateAPIView(ListCreateAPIView):
 
 
 @extend_schema(tags=['head_category'])
-class CategoryRetrieveUpdateDestroyAPIView(RetrieveDestroyAPIView):
+class CategoryRetrieveDestroyAPIView(RetrieveDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryDetailModelSerializer
 
 
 @extend_schema(tags=['restaurant'])
-class RestaurantRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+class RestaurantListCreateAPIView(ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantListModelSerializer
 
 
+@extend_schema(tags=['restaurant'])
+class RestaurantRetrieveDestroyAPIView(RetrieveDestroyAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantDetailModelSerializer
+
+
 @extend_schema(tags=['restaurant_category'])
-class RestaurantCategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+class RestaurantCategoryListCreateAPIView(ListCreateAPIView):
     queryset = RestaurantCategory.objects.all()
     serializer_class = RestaurantCategoryListModelSerializer
+
+
+@extend_schema(tags=['restaurant_category'])
+class RestaurantCategoryRetrieveDestroyAPIView(RetrieveDestroyAPIView):
+    queryset = RestaurantCategory.objects.all()
+    serializer_class = RestaurantCategoryDetailModelSerializer
 
 
 @extend_schema(tags=['product'])

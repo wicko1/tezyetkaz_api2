@@ -6,10 +6,6 @@ from rest_framework.serializers import Serializer, EmailField
 from apps.models import Product, User, Category, Restaurant, RestaurantCategory
 
 
-
-
-
-
 class SendCodeMailSerializer(Serializer):
     email = EmailField(
         max_length=255,
@@ -48,8 +44,19 @@ class VerifyCodeSerializer(Serializer):
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = 'id', 'first_name', 'last_name',  'email', 'profile_photo'
+        fields = 'id', 'first_name', 'last_name', 'email', 'profile_photo'
 
+
+class RestaurantListModelSerializer(ModelSerializer):
+    class Meta:
+        model = Restaurant
+        exclude = ()
+
+
+class RestaurantDetailModelSerializer(ModelSerializer):
+    class Meta:
+        model = Restaurant
+        exclude = ()
 
 
 class CategoryListModelSerializer(ModelSerializer):
@@ -64,17 +71,13 @@ class CategoryDetailModelSerializer(ModelSerializer):
         exclude = ()
 
 
-class RestaurantListModelSerializer(ModelSerializer):
-    categories = CategoryListModelSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Restaurant
-        exclude = ('')
-
-
-
-
 class RestaurantCategoryListModelSerializer(ModelSerializer):
+    class Meta:
+        model = RestaurantCategory
+        fields = 'name',
+
+
+class RestaurantCategoryDetailModelSerializer(ModelSerializer):
     class Meta:
         model = RestaurantCategory
         exclude = ()
@@ -84,8 +87,3 @@ class ProductListModelSerializer(ModelSerializer):
     class Meta:
         model = Product
         exclude = ()
-
-    def to_representation(self, instance: Product):
-        repr = super().to_representation(instance)
-        repr['category'] = CategoryListModelSerializer(instance.category).data
-        return repr
