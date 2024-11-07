@@ -6,6 +6,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, ListCreateAPIView, \
     RetrieveDestroyAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from apps.models import Product, User, Category, Restaurant, RestaurantCategory
@@ -13,7 +14,7 @@ from apps.serializers import (
     SendCodeMailSerializer,
     VerifyCodeSerializer, ProductListModelSerializer, UserModelSerializer, CategoryListModelSerializer,
     RestaurantListModelSerializer, RestaurantCategoryListModelSerializer, CategoryDetailModelSerializer,
-    RestaurantDetailModelSerializer, RestaurantCategoryDetailModelSerializer,
+    RestaurantDetailModelSerializer, RestaurantCategoryDetailModelSerializer, OrdersListModelSerializer,
 )
 
 
@@ -21,12 +22,12 @@ from apps.serializers import (
 class UserAPIView(ListAPIView):
     queryset = User.objects.order_by('id')
     serializer_class = UserModelSerializer
-
+    permission_classes = AllowAny,
 
 @extend_schema(tags=['auth'])
 class SendCodeAPIView(GenericAPIView):
     serializer_class = SendCodeMailSerializer
-
+    permission_classes = AllowAny,
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -47,7 +48,7 @@ class SendCodeAPIView(GenericAPIView):
 @extend_schema(tags=['auth'])
 class VerifyCodeAPIView(GenericAPIView):
     serializer_class = VerifyCodeSerializer
-
+    permission_classes = AllowAny,
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -58,39 +59,46 @@ class VerifyCodeAPIView(GenericAPIView):
 class CategoryListCreateAPIView(ListCreateAPIView):
     queryset = Category.objects.order_by('id')
     serializer_class = CategoryListModelSerializer
+    permission_classes = AllowAny,
 
 
 @extend_schema(tags=['head_category'])
 class CategoryRetrieveDestroyAPIView(RetrieveDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryDetailModelSerializer
-
+    permission_classes = AllowAny,
 
 @extend_schema(tags=['restaurant'])
 class RestaurantListCreateAPIView(ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantListModelSerializer
-
+    permission_classes = AllowAny,
 
 @extend_schema(tags=['restaurant'])
 class RestaurantRetrieveDestroyAPIView(RetrieveDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantDetailModelSerializer
-
+    permission_classes = AllowAny,
 
 @extend_schema(tags=['restaurant_category'])
 class RestaurantCategoryListCreateAPIView(ListCreateAPIView):
     queryset = RestaurantCategory.objects.all()
     serializer_class = RestaurantCategoryListModelSerializer
-
+    permission_classes = AllowAny,
 
 @extend_schema(tags=['restaurant_category'])
 class RestaurantCategoryRetrieveDestroyAPIView(RetrieveDestroyAPIView):
     queryset = RestaurantCategory.objects.all()
     serializer_class = RestaurantCategoryDetailModelSerializer
-
+    permission_classes = AllowAny,
 
 @extend_schema(tags=['product'])
 class ProductRetrieveUpdateDestroyAPIViewAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListModelSerializer
+    permission_classes = AllowAny,
+
+@extend_schema(tags=['Order_product'])
+class OrdersListAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = OrdersListModelSerializer

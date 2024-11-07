@@ -87,3 +87,8 @@ class ProductListModelSerializer(ModelSerializer):
     class Meta:
         model = Product
         exclude = ()
+
+class OrdersListModelSerializer(ModelSerializer):
+    class Meta:
+        model = Product
+        fields = 'name', 'price',
