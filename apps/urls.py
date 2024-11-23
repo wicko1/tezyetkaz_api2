@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import (
 from apps.views import SendCodeAPIView, VerifyCodeAPIView, UserAPIView, ProductRetrieveUpdateDestroyAPIViewAPIView, \
     CategoryListCreateAPIView, CategoryRetrieveDestroyAPIView, RestaurantListCreateAPIView, \
     RestaurantRetrieveDestroyAPIView, RestaurantCategoryListCreateAPIView, RestaurantCategoryRetrieveDestroyAPIView, \
-    OrdersListAPIView
+    OrdersListAPIView, SearchFilterListAPIView
 
 urlpatterns = [
     path('send-email', SendCodeAPIView.as_view(), name='send_email'),
@@ -23,6 +23,7 @@ urlpatterns = [
          name='restaurant_category_detail'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('order-list', OrdersListAPIView.as_view(), name='order-list'),
+    path('order-list', OrdersListAPIView.as_view(), name='order_list'),
+    path('search-filter', SearchFilterListAPIView.as_view(), name='search_filter'),
 
 ]

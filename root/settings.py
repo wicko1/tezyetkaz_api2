@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from datetime import timedelta
 
 from pathlib import Path
+
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,7 +18,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'apps',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_filters',
     'django_ckeditor_5',
     'mptt',
     'drf_spectacular',
@@ -77,7 +78,6 @@ DATABASES = {
     }
 }
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -92,8 +92,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 
 LANGUAGE_CODE = 'en-us'
 
@@ -111,6 +109,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
 REST_FRAMEWORK = {
     # YOUR SETTINGS
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -223,7 +224,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_NAME')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
-
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
