@@ -62,7 +62,7 @@ class RestaurantDetailModelSerializer(ModelSerializer):
 class CategoryListModelSerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = 'name', 'photo'
+        fields = '__all__'
 
 
 class CategoryDetailModelSerializer(ModelSerializer):
@@ -92,3 +92,8 @@ class OrdersListModelSerializer(ModelSerializer):
     class Meta:
         model = Product
         fields = 'name', 'price',
+
+class SearchModelSerializer(ModelSerializer):
+    class Meta:
+        model = Product
+        fields = 'name', 'category'
