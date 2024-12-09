@@ -42,7 +42,7 @@ class Restaurant(Model):
 
 
 class RestaurantCategory(Model):
-    name = CharField(max_length=255)  # max_length qo‘shildi
+    name = CharField(max_length=255)
     restaurant = ForeignKey(
         'apps.Restaurant', on_delete=CASCADE, related_name='restaurant_categories', null=True, blank=True
     )

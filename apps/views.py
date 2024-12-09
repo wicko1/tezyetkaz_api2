@@ -104,7 +104,7 @@ class RestaurantCategoryRetrieveDestroyAPIView(RetrieveDestroyAPIView):
 
 
 @extend_schema(tags=['product'])
-class ProductRetrieveUpdateDestroyAPIViewAPIView(RetrieveUpdateDestroyAPIView):
+class ProductRetrieveUpdateDestroyAPIViewAPIView(RetrieveDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListModelSerializer
     permission_classes = AllowAny,
