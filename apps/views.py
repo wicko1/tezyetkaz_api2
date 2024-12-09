@@ -1,11 +1,10 @@
-from itertools import product
 from random import randint
 
 from django.core.cache import cache
 from django.core.mail import send_mail
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, ListCreateAPIView, \
+from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView, \
     RetrieveDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -104,7 +103,7 @@ class RestaurantCategoryRetrieveDestroyAPIView(RetrieveDestroyAPIView):
 
 
 @extend_schema(tags=['product'])
-class ProductRetrieveUpdateDestroyAPIViewAPIView(RetrieveDestroyAPIView):
+class ProductRetrieveDestroyAPIViewAPIView(RetrieveDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListModelSerializer
     permission_classes = AllowAny,
