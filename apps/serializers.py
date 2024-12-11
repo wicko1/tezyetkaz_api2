@@ -74,7 +74,7 @@ class CategoryDetailModelSerializer(ModelSerializer):
 class RestaurantCategoryListModelSerializer(ModelSerializer):
     class Meta:
         model = RestaurantCategory
-        fields = 'name',
+        fields = 'id', 'name',
 
 
 class RestaurantCategoryDetailModelSerializer(ModelSerializer):
